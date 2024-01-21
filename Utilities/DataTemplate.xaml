@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:MinimarketApp.ViewModel"
+                    xmlns:view="clr-namespace:MinimarketApp.View">
+
+    <DataTemplate DataType="{x:Type vm:ProdukVM}">
+        <view:Produk />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:KategoriVM}">
+        <view:Kategori />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:PemasokVM}">
+        <view:Pemasok />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:TransaksiVM}">
+        <view:Transaksi />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:UserVM}">
+        <view:User />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SatuanVM}">
+        <view:Satuan />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:PelangganVM}">
+        <view:Pelanggan />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:KaryawanVM}">
+        <view:Karyawan />
+    </DataTemplate>
+
+</ResourceDictionary>
