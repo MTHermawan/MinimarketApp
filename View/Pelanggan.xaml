@@ -4,9 +4,79 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MinimarketApp.View"
+             xmlns:vm="clr-namespace:MinimarketApp.ViewModel"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             d:DataContext="{d:DesignInstance Type=vm:PelangganVM,IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <Border Background="White" Padding="5" BorderBrush="Black" CornerRadius="4">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*" MinWidth="320"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="0.2*" MinWidth="140"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,10">
+                    <TextBlock Text="Pelanggan" FontWeight="SemiBold" FontSize="30" Margin="0"/>
+                    <Border BorderBrush="Black" BorderThickness="0.8" Margin="10,2,-10,3"/>
+                </StackPanel>
+
+                <DataGrid Grid.Row="1" x:Name="dataPelanggan"
+                      ItemsSource="{Binding Items, Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedItem}" Style="{StaticResource DataGrid1}"
+                      CellStyle="{StaticResource DataGridCellStyle1}" RowStyle="{StaticResource DataGridRowStyle1}"
+                      ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle1}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID Pelanggan" Binding="{Binding Path=telp_pelanggan, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                    <DataGridTextColumn Header="Nama" Binding="{Binding Path=nama_pelanggan, UpdateSourceTrigger=PropertyChanged}" Width=".25*"/>
+                    <DataGridTextColumn Header="Alamat" Binding="{Binding Path=alamat, UpdateSourceTrigger=PropertyChanged}" Width=".3*"/>
+                    <DataGridTextColumn Header="Jenis Kelamin" Binding="{Binding Path=jenis_kelamin, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="White" Focusable="False"/>
+
+            <Border Grid.Column="0" BorderBrush="Black" Opacity="0.5" BorderThickness="0,0,.5,0" Margin="-0,-5,0,-5" Focusable="False" />
+            <Border Grid.Column="2" BorderBrush="Black" Opacity="0.5" BorderThickness="0,0,0,0" Margin="-0,-5,0,-5" Focusable="False" />
+            <Border Grid.Column="2" Background="Transparent" Margin="0,-15,-15,-15" CornerRadius="0,8,8,0" />
+
+            <Grid Grid.Column="2">
+                <Grid Margin="5,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Grid.Row="0" CanContentScroll="True" ui:ScrollViewerHelper.AutoHideScrollBars="True" Width="Auto" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <StackPanel Orientation="Vertical" Margin="0,0,20,0">
+                                <TextBlock Text="Nomor Telepon:" FontSize="14"/>
+                                <TextBox x:Name="TxtTelepon" Style="{StaticResource TextBox1}" Margin="0,2,0,5" Height="35" FontSize="14" Text="{Binding Path=InputNomorTelepon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="Nama Pelanggan:" FontSize="14"/>
+                                <TextBox x:Name="TxtNama" Style="{StaticResource TextBox1}" Margin="0,2,0,5" Height="35" FontSize="14" Text="{Binding Path=InputNamaPelanggan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="Alamat:" FontSize="14"/>
+                                <TextBox x:Name="TxtAlamat" Style="{StaticResource TextBox1}" Margin="0,2,0,5" Height="35" FontSize="14" Text="{Binding Path=InputAlamat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="Jenis Kelamin:" FontSize="14"/>
+                                <ComboBox x:Name="CbKelamin" Style="{StaticResource ComboBox1}" Height="30" ItemsSource="{Binding ComboKelamin, Mode=TwoWay}" SelectedItem="{Binding SelectedKelamin}" Margin="0,5" />
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                    <StackPanel Grid.Row="1" DockPanel.Dock="Bottom" Height="Auto" Orientation="Vertical" VerticalAlignment="Bottom" Margin="0,5">
+                        <Button x:Name="BtnTambah" Style="{StaticResource Button1}" Padding="10" Content="Tambah" FontSize="14" Command="{Binding AddCommand}" Margin="0,5"/>
+                        <Button x:Name="BtnUbah" Style="{StaticResource Button1Yellow}" Padding="10" Content="Ubah" FontSize="14" Command="{Binding EditCommand}" Margin="0,5"/>
+                        <Button x:Name="BtnHapus" Style="{StaticResource Button1Red}" Padding="10" Content="Hapus" FontSize="14" Command="{Binding DeleteCommand}" Margin="0,5"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Black" Opacity="0.3"/>
+        </Border.Effect>
+    </Border>
 </UserControl>

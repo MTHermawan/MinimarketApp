@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="MinimarketApp.View.UserControls.ToggleButtonAccountMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MinimarketApp.View.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="100">
+    <Border Width="Auto">
+        <StackPanel Width="Auto">
+            <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Height="30" Click="btnLogout_Click"/>
+        </StackPanel>
+    </Border>
+</UserControl>

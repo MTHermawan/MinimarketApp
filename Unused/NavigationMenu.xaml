@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="MinimarketApp.View.NavigationMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MinimarketApp.View"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:vm="clr-namespace:MinimarketApp.ViewModel"
+             d:DataContext="{d:DesignInstance Type=vm:NavigationMenuVM}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="240">
+    <Grid>
+        <!-- <Border Background="RoyalBlue"/>
+        <DockPanel>
+            <Grid Margin="0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Vertical">
+                    <Button x:Name="btnDashboard" Style="{StaticResource navMenuButton}" Command="{Binding DashboardCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterial Kind="Speedometer" Style="{StaticResource navMenuButtonIcon}" />
+                            <TextBlock Text="Dashboard"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnProduk" Style="{StaticResource navMenuButton}" Command="{Binding ProdukCommand}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <iconPacks:PackIconMaterial Kind="PackageVariant" Style="{StaticResource navMenuButtonIcon}" />
+                            <TextBlock Text="Produk"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnPelanggan" Style="{StaticResource navMenuButton}" Command="{Binding PelangganCommand}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <iconPacks:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource navMenuButtonIcon}" />
+                            <TextBlock Text="Pelanggan"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnTransaksi" Style="{StaticResource navMenuButton}" Command="{Binding TransaksiCommand}">
+                        <StackPanel Orientation="Horizontal" Width="Auto">
+                            <iconPacks:PackIconMaterial Kind="ChartBar" Style="{StaticResource navMenuButtonIcon}" />
+                            <TextBlock Text="Transaksi"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnPembelian" Style="{StaticResource navMenuButton}" Command="{Binding TransaksiPembelianCommand}">
+                        <StackPanel Orientation="Horizontal" Width="Auto">
+                            <iconPacks:PackIconMaterial Kind="ChartBar" Style="{StaticResource navMenuButtonIcon}" />
+                            <TextBlock Text="Transaksi Pembelian"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnKategori" Style="{StaticResource navMenuButton}" Command="{Binding KategoriCommand}">
+                        <StackPanel Orientation="Horizontal" Width="Auto">
+                            <iconPacks:PackIconMaterial Kind="Package" Style="{StaticResource navMenuButtonIcon}" />
+                            <TextBlock Text="Kategori"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnSatuan" Style="{StaticResource navMenuButton}" Command="{Binding SatuanCommand}">
+                        <StackPanel Orientation="Horizontal" Width="Auto">
+                            <iconPacks:PackIconMaterial Kind="Package" Style="{StaticResource navMenuButtonIcon}" />
+                            <TextBlock Text="Satuan"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnPemasok" Style="{StaticResource navMenuButton}" Command="{Binding PemasokCommand}">
+                        <StackPanel Orientation="Horizontal" Width="Auto">
+                            <iconPacks:PackIconMaterial Kind="TruckDelivery" Style="{StaticResource navMenuButtonIcon}" />
+                            <TextBlock Text="Supplier"/>
+                        </StackPanel>
+                    </Button> -->
+
+                    <!-- <Button x:Name="btnTransaksiDropdown" Style="{StaticResource navMenuButton}" Click="btnTransaksiDropdown_Click"></Button> -->
+
+
+                <!-- </StackPanel>
+                <Frame x:Name="mainFrame" Grid.Row="1"/>
+            </Grid>
+        </DockPanel> -->
+    </Grid> 
+</UserControl>

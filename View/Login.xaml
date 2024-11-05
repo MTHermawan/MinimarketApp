@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MinimarketApp.View"
              xmlns:userControls="clr-namespace:MinimarketApp.View.UserControls"
+             xmlns:viewmodel="clr-namespace:MinimarketApp.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewmodel:LoginVM}"
              mc:Ignorable="d" 
              Height="220" Width="200">
     <Grid Background="White">
@@ -19,9 +21,11 @@
 
                 <TextBlock Grid.Row="0" Text="LOGIN" HorizontalAlignment="Center" Foreground="White" Margin="10"/>
 
-                <userControls:TextBox x:Name="Input_Username" Grid.Row="1" BoundText="Username" Margin="20, 10"/>
-                <userControls:TextBox x:Name="Input_Password" Grid.Row="2" BoundText="Password" Margin="20, 10"/>
-                <Button x:Name="BtnLogin" Grid.Row="3" Content="Login" Margin="20, 10" Click="BtnLogin_Click" />
+                <!-- <userControls:TextBox x:Name="UserControl_Username" Grid.Row="1" BoundText="Username" Margin="20, 10"/>
+                <userControls:TextBox x:Name="UserControl_Password" Grid.Row="2" BoundText="Password" Margin="20, 10"/> -->
+                <TextBox Name="InputUsername" Grid.Row="1" Text="{Binding InputUsername, UpdateSourceTrigger=PropertyChanged}" Margin="20,8" Visibility="Visible"/>
+                <TextBox Name="InputPassword" Grid.Row="2" Text="{Binding InputPassword, UpdateSourceTrigger=PropertyChanged}" Margin="20,8" Visibility="Visible"/>
+                <Button Grid.Row="3" Content="Login" Margin="20, 10" Command="{Binding LoginCommand}" />
             </Grid>
         </StackPanel>
     </Grid>

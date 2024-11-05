@@ -17,7 +17,7 @@ namespace MinimarketApp.Data
             {
                 DbConfig? config = ReadConfig();
                 if (config == null) return null;
-                return $"server={config.Server};database={config.Database};user={config.User};password={config.Password}";
+                return $"server={config.Server};database={config.Database};user={config.User};password={config.Password};Connection Timeout=1";
             }   
         }
 

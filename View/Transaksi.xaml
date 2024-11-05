@@ -4,9 +4,474 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MinimarketApp.View"
+             xmlns:vm="clr-namespace:MinimarketApp.ViewModel"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <Border x:Name="MainBackground" Background="White" Padding="5" BorderBrush="Black" CornerRadius="4">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
+            <!-- Top Transaction Information -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="260" Width="0.3*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Margin="0,0,0,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Information Box -->
+                        <Grid Background="{Binding Background, ElementName=MainBackground}" HorizontalAlignment="Left">
+                            <Border BorderBrush="#333333"
+                                    BorderThickness="3"
+                                    CornerRadius="6"
+                                    Margin="4">
+                            </Border>
+
+                            <Border BorderBrush="#333333"
+                                    BorderThickness="1"
+                                    CornerRadius="3"
+                                    Margin="9">
+                            </Border>
+
+                            <Grid Width="Auto">
+                                <TextBlock Text="Info Transaksi"
+                                           Foreground="#333333"
+                                           FontSize="16"
+                                           FontFamily="/Fonts/#Lato"
+                                           FontWeight="Bold"
+                                           Background="{Binding Background, ElementName=MainBackground}"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Padding="6,0"
+                                           Width="Auto"
+                                           Height="19"
+                                           Margin="40,-4,0,0" />
+                            </Grid>
+                            <Border Background="Transparent"
+                                Margin="11"
+                                Panel.ZIndex="2"
+                                Padding="10,4,10,2">
+                                <Grid Grid.Row="1" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Row 1 -->
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ID Transaksi" HorizontalAlignment="Left" FontSize="14" VerticalAlignment="Center" Padding="0,5" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text=":" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Center" Width="Auto" Padding="10,0"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding InputIdTransaksi}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Padding="5,0"/>
+                                    <!-- <TextBox Grid.Row="0" Grid.Column="2" x:Name="txtBoxIdTransaksi" FontSize="14" Height="25" Style="{StaticResource TextBox1}" Text="{Binding InputIdTransaksi, UpdateSourceTrigger=PropertyChanged}" Focusable="False" IsReadOnly="True"/> -->
+
+                                    <!-- Row 2 -->
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Kasir" HorizontalAlignment="Left"  FontSize="14" VerticalAlignment="Center" Padding="0,5" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text=":" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Center" Width="Auto" Padding="10,0"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding KasirTransaksi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Padding="5,0" FontSize="14"/>
+                                    <!-- <TextBox Grid.Row="1" Grid.Column="2" x:Name="txtBoxKasir" FontSize="14" Height="25" Style="{StaticResource TextBox1}" Text="Test" Focusable="False" IsReadOnly="True"/> -->
+
+                                    <!-- Row 3 -->
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Tanggal" HorizontalAlignment="Left"  FontSize="14" VerticalAlignment="Center" Padding="0,5" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text=":" HorizontalAlignment="Center" FontSize="14" VerticalAlignment="Center" Width="Auto" Padding="10,0"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding TanggalTransaksi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Padding="5,0" FontSize="14"/>
+                                    <!-- <TextBox Grid.Row="1" Grid.Column="2" x:Name="txtBoxKasir" FontSize="14" Height="25" Style="{StaticResource TextBox1}" Text="Test" Focusable="False" IsReadOnly="True"/> -->
+
+                                    <!-- Row 4 -->
+                                    <!-- Label Grid.Row="3" Grid.Column="0" Content="ID Pelanggan" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" />
+                            <Label Grid.Row="3" Grid.Column="1" Content=":" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Padding="10,0"/>
+                            <ComboBox Grid.Row="3" Grid.Column="2" x:Name="ComboPelanggan" ItemsSource="{Binding CbPelanggan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="ComboPelangganView"
+                                      SelectedItem="{Binding SelectedCbPelanggan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                      HorizontalAlignment="Stretch" Width="Auto" IsEditable="True" StaysOpenOnEdit="True" IsReadOnly="False" Style="{StaticResource ComboBox1}" KeyUp="ComboPelanggan_KeyUp"
+                                      Text="{Binding CbPelangganText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MaxDropDownHeight="110" Margin="0,0,0,0" IsTextSearchEnabled="False" Height="25" /> -->
+
+                                    <!-- Row 5 -->
+                                    <!-- <Label Grid.Row="4" Grid.Column="0" Content="Kode Produk" />
+                            <Label Grid.Row="4" Grid.Column="1" Content=":" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Padding="10,0"/>
+                            <ComboBox Grid.Row="4" Grid.Column="2" x:Name="ComboProduk" Style="{StaticResource ComboBox1}" ItemsSource="{Binding CbProduk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="ComboProdukView"
+                                      SelectedItem="{Binding SelectedCbProduk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsEditable="True" IsReadOnly="False" StaysOpenOnEdit="True" KeyUp="ComboProduk_KeyUp"
+                                      Text="{Binding CbProdukText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MaxDropDownHeight="110" HorizontalAlignment="Stretch" Width="Auto" IsTextSearchEnabled="False" Height="25" Margin="0,0,0,0"/>
+                            <TextBlock Grid.Row="4" Grid.Column="3" x:Name="ket_tidaktersedia" Text="Barang Tidak Tersedia!" Visibility="{Binding TidakTersediaVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Red" TextTrimming="WordEllipsis" Margin="0,3,0,0" /> -->
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+
+                        <StackPanel Grid.Row="3" Orientation="Vertical" Margin="0,0,10,10" Visibility="{Binding CollapseOnLocked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Grid.Row="0" Margin="0,5" FontSize="14" Text="Barcode / Nama Produk :" HorizontalAlignment="Left" VerticalAlignment="Center" Width="Auto" Padding="10,0" />
+
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                
+                                    <ComboBox Grid.Row="1" Grid.Column="0" x:Name="ComboProduk" Style="{StaticResource ComboBox1}" ItemsSource="{Binding CbProduk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="ComboProdukView"
+                                          SelectedItem="{Binding SelectedCbProduk, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsEditable="True" IsReadOnly="False" StaysOpenOnEdit="True" KeyUp="ComboProduk_KeyUp"
+                                          Text="{Binding CbProdukText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextBoxBase.TextChanged="ComboProduk_TextChanged" PreviewKeyDown="ComboProduk_PreviewKeyDown" MaxDropDownHeight="110" HorizontalAlignment="Stretch" Width="Auto" IsTextSearchEnabled="False" Height="25" Margin="10,0"/>
+                                    <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource Button1Green}" Padding="8,0" FontSize="12" HorizontalAlignment="Stretch" Content="Tambah Item" Command="{Binding AddRowCommand}" Width="Auto" Margin="0" />
+                                </Grid>
+                                
+                                <!-- <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                                    <Label Content="Jumlah:"/>
+                                    <TextBox x:Name="txtBoxJumlah" HorizontalAlignment="Stretch" FontSize="14" Height="25" Style="{StaticResource TextBox1}" Text="{Binding InputJumlah, UpdateSourceTrigger=PropertyChanged}" LostFocus="txtBoxJumlah_LostFocus" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                                    <Label Content="Stok:"/>
+                                    <TextBox x:Name="txtBoxStok" HorizontalAlignment="Stretch" FontSize="14" Height="25" Style="{StaticResource TextBox1}" Text="{Binding CbProdukStok, UpdateSourceTrigger=PropertyChanged}" Focusable="False" IsReadOnly="True"/>
+                                </StackPanel> -->
+                                        
+                            </Grid>
+                            <TextBlock x:Name="ket_tidaktersedia" Text="Barang Tidak Tersedia!" Visibility="Collapsed" Foreground="Red" TextTrimming="WordEllipsis" Margin="10,5,0,0" />
+                            <TextBlock x:Name="ketStok" Text="Stok Tidak Mencukupi!" IsVisibleChanged="ketStok_IsVisibleChanged" Visibility="Collapsed" Foreground="Red" TextTrimming="WordEllipsis" Margin="0,3,0,0" />
+                        </StackPanel>
+                        <!-- <StackPanel Grid.Row="4" Orientation="Vertical" Margin="0,5,0,10">
+                            <Button HorizontalAlignment="Left" Content="Tambah Produk" Command="{Binding AddRowCommand}" Width="100" Height="30" Margin="0" />
+                        </StackPanel> -->
+                    </Grid>
+                </Grid>
+                
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="6,4">
+                        <TextBlock Text="Grand Total"
+                                   FontSize="20"
+                                   Margin="0,0,3,0"
+                                   HorizontalAlignment="Right"
+                                   FontFamily="/Fonts/#Lato" />
+                        <Border Grid.Row="0"
+                            Margin="0,0,0,0"
+                            Background="Transparent"
+                            Width="Auto"
+                            Height="Auto"
+                            Padding="0,0"
+                            BorderBrush="Transparent"
+                            BorderThickness="2">
+                            <DockPanel>
+                                <!-- <TextBlock DockPanel.Dock="Left" FontWeight="Bold" Foreground="#FFFF1C00" VerticalAlignment="Center" Text="Rp." FontSize="48" FontFamily="/Fonts/#Lato" /> -->
+                                <TextBlock DockPanel.Dock="Right"
+                                           FontWeight="Bold"
+                                           Foreground="#FFFF1C00"
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Right"
+                                           Text="{Binding GrandTotal, Mode=TwoWay}"
+                                           FontSize="46"
+                                           FontFamily="/Fonts/#Lato" />
+                            </DockPanel>
+                        </Border>
+                    </StackPanel>
+                    
+                    <!-- PELANGGAN BOX -->
+                    <Grid Grid.Row="0" Margin="0,0,0,0"
+                          Background="{Binding Background, ElementName=MainBackground}"
+                          HorizontalAlignment="Right"
+                          Width="350">
+                        <Border BorderBrush="#333333"
+                                BorderThickness="3"
+                                CornerRadius="6"
+                                Margin="4">
+                        </Border>
+                        <Border BorderBrush="#333333"
+                                BorderThickness="1"
+                                CornerRadius="3"
+                                Margin="9">
+                        </Border>
+                        <Grid Width="Auto">
+                            <TextBlock Text="Pelanggan"
+                                   Foreground="#333333"
+                                   FontSize="16"
+                                   FontFamily="/Fonts/#Lato"
+                                   FontWeight="Bold"
+                                   Background="{Binding Background, ElementName=MainBackground}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Padding="6,0"
+                                   Width="Auto"
+                                   Height="19"
+                                   Margin="40,-4,0,0" />
+
+                        </Grid>
+                        <Border Background="Transparent"
+                                Margin="11"
+                                Panel.ZIndex="2"
+                                Padding="4">
+                            <Grid Margin="5,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="ID Pelanggan"
+                                           Grid.Row="0"
+                                           Grid.Column="0"
+                                           FontSize="14"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="0,5"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text=":"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           FontSize="14"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Padding="10,0"/>
+                                <TextBlock Text="{Binding CbPelangganText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                           Grid.Row="0"
+                                           Grid.Column="2"
+                                           FontSize="14"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Padding="5,0"/>
+                                <ComboBox Grid.Row="0" Grid.Column="2" Visibility="{Binding CollapseOnLocked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="ComboPelanggan" ItemsSource="{Binding CbPelanggan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="telp_pelanggan"
+                                          SelectedItem="{Binding SelectedCbPelanggan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" IsEditable="True" StaysOpenOnEdit="True"
+                                          IsReadOnly="False" Style="{StaticResource ComboBox1}" KeyUp="ComboPelanggan_KeyUp" PreviewKeyDown="ComboPelanggan_PreviewKeyDown" TextBoxBase.TextChanged="ComboPelanggan_TextChanged" Text="{Binding CbPelangganText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                          MaxDropDownHeight="110" IsTextSearchEnabled="False" Height="26" />
+
+
+                                <TextBlock Text="Nama"
+                                           Grid.Row="1"
+                                           Grid.Column="0"
+                                           FontSize="14"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Margin="0,5"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text=":"
+                                           Grid.Row="1"
+                                           Grid.Column="1"
+                                           FontSize="14"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Padding="10,0"/>
+                                <TextBlock Text="{Binding SelectedCbPelanggan[nama_pelanggan]}"
+                                           Grid.Row="1"
+                                           Grid.Column="2"
+                                           FontSize="14"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Padding="5,0"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- Tabel Keranjang -->
+            <Grid Grid.Row="1" Margin="5,0">
+                <DataGrid Grid.Row="0" 
+                          x:Name="DataTransaksi"
+                          Style="{StaticResource DataGrid1}"
+                          CellStyle="{StaticResource DataGridCellStyle1}"
+                          RowStyle="{StaticResource DataGridRowStyle1}"
+                          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle1}"
+                          ItemsSource="{Binding ItemsSourceProduk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedProduk}"
+                          CanUserAddRows="False"
+                          IsReadOnly="False"
+                          TargetUpdated="DataTransaksi_TargetUpdated"
+                          Panel.ZIndex="2"
+                          Visibility="{Binding CollapseOnLocked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Barcode" Binding="{Binding barcode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.2*" MaxWidth="120" MinWidth="80" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Item" Binding="{Binding nama_produk, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.4*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Harga" Binding="{Binding formatted_harga_jual, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.2*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Qty" Binding="{Binding kuantitas, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="50"/> 
+                        <DataGridTextColumn Header="Stok" Binding="{Binding stok, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="50" IsReadOnly="False" />
+                        <DataGridComboBoxColumn Header="Satuan" SelectedValueBinding="{Binding id_satuan, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="nama_satuan" SelectedValuePath="id_satuan" MinWidth="80" Width="Auto">
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding Satuans, UpdateSourceTrigger=PropertyChanged}" />
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding Satuans, UpdateSourceTrigger=PropertyChanged}" />
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+                        <DataGridTextColumn Header="Subtotal" Binding="{Binding formatted_subtotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.2*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Diskon" Binding="{Binding formatted_harga_diskon, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.2*" IsReadOnly="True" />
+                        <DataGridTemplateColumn Header="Aksi" Width="60">
+                            <DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle1}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTemplateColumn.HeaderStyle>
+                            <DataGridTemplateColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                                        <Button Style="{StaticResource Button1Red}" Command="{Binding Path=DataContext.DeleteRowCommand, RelativeSource = {RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                            <iconPacks:PackIconMaterial Kind="Close" Height="20" Width="30" Padding="4" Foreground="White" />
+                                        </Button>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid Grid.Row="0" 
+                          x:Name="DataTransaks2"
+                          Style="{StaticResource DataGrid1}"
+                          CellStyle="{StaticResource DataGridCellStyle1}"
+                          RowStyle="{StaticResource DataGridRowStyle1}"
+                          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle1}"
+                          ItemsSource="{Binding ItemsSourceProduk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedProduk}"
+                          CanUserAddRows="False"
+                          IsReadOnly="False"
+                          TargetUpdated="DataTransaksi_TargetUpdated">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Barcode" Binding="{Binding barcode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.2*" MaxWidth="120" MinWidth="80" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Item" Binding="{Binding nama_produk, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.4*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Harga" Binding="{Binding formatted_harga_jual, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.2*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Qty" Binding="{Binding kuantitas, Mode=TwoWay, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Width="50"/>
+                        <DataGridComboBoxColumn Header="Satuan" SelectedValueBinding="{Binding id_satuan, NotifyOnTargetUpdated=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="nama_satuan" SelectedValuePath="id_satuan" MinWidth="80" Width="Auto">
+                            <DataGridComboBoxColumn.ElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding Satuans, UpdateSourceTrigger=PropertyChanged}" />
+                                </Style>
+                            </DataGridComboBoxColumn.ElementStyle>
+                            <DataGridComboBoxColumn.EditingElementStyle>
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="ItemsSource" Value="{Binding Satuans, UpdateSourceTrigger=PropertyChanged}" />
+                                </Style>
+                            </DataGridComboBoxColumn.EditingElementStyle>
+                        </DataGridComboBoxColumn>
+                        <DataGridTextColumn Header="Subtotal" Binding="{Binding formatted_subtotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.2*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Diskon" Binding="{Binding formatted_harga_diskon, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Width="0.2*" IsReadOnly="True" />
+                        <DataGridTemplateColumn Header="Aksi" Width="60">
+                            <DataGridTemplateColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle1}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTemplateColumn.HeaderStyle>
+                            <DataGridTemplateColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle1}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTemplateColumn.CellStyle>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                                        <Button Style="{StaticResource Button1Red}" Command="{Binding Path=DataContext.DeleteRowCommand, RelativeSource = {RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                            <iconPacks:PackIconMaterial Kind="Close" Height="20" Width="30" Padding="4" Foreground="White" />
+                                        </Button>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- Bottom Transaction Information -->
+            <Grid Grid.Row="2" Margin="0,5,0,0">
+                <!-- <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions> -->
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Background="Transparent" Margin="0,0">
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <Button x:Name="btnSubmit" Content="Simpan" Style="{StaticResource Button1}" Command="{Binding SubmitTransaksiCommand}" Visibility="{Binding CollapseOnLocked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" Height="30" Margin="5,5,0,0" />
+                        <!-- <Button x:Name="Print" Content="Cetak" Style="{StaticResource Button1}" Click="Print_CLick" Width="150" Height="30" Margin="5,5,0,0" /> -->
+                        <Button Content="Bayar" Style="{StaticResource Button1Green}" Command="{Binding BayarTransaksiCommand}" Visibility="{Binding CollapseOnLocked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" Height="30" Margin="5,5,0,0" />
+                        <Button Content="Transaksi Baru" Style="{StaticResource Button1Yellow}" Command="{Binding NewTransaksiCommand}" Width="150" Height="30" Margin="5,5,0,0" />
+                        <Button Content="Batal" Style="{StaticResource Button1Red}" Command="{Binding CancelTransaksiCommand}" Visibility="{Binding CollapseOnLocked, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="150" Height="30" Margin="5,5,0,0" />
+                    </WrapPanel>
+                </Grid>
+                <Grid Grid.Column="1" Background="Transparent" Width="250" Margin="5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Diskon" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text=":" Margin="5,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBox1}"   Text="{Binding TotalDiskon, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" />
+                    
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Total" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text=":" Margin="5,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBox1}"   Text="{Binding GrandTotal, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Pembayaran" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text=":" Margin="5,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBox1}" Text="{Binding InputPembayaran, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsTransaksiLocked, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Kembalian" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" Text=":" Margin="5,5" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource TextBox1}" Text="{Binding InputKembalian, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsReadOnly="True" />
+                </Grid>
+                <!-- <StackPanel Grid.Row="0">
+                    <Label Content="Total:"/>
+                    <TextBox HorizontalAlignment="Left" Style="{StaticResource TextBox1}"  Text="{Binding TotalHarga, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="200" IsReadOnly="True" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <Label Content="Pembayaran:"/>
+                    <TextBox HorizontalAlignment="Left" Style="{StaticResource TextBox1}"  Text="{Binding InputPembayaran, UpdateSourceTrigger=PropertyChanged}" Width="200" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <Label Content="Kembalian:"/>
+                    <TextBox HorizontalAlignment="Left" Style="{StaticResource TextBox1}"  Text="{Binding InputKembalian, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="200" IsReadOnly="True" />
+                    <Button Content="Submit Transaksi" Command="{Binding SubmitTransaksiCommand}" Width="150" Height="30" Margin="0,10,0,0" />
+                </StackPanel> -->
+            </Grid>
+        </Grid>
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="Black" Opacity="0.3"/>
+        </Border.Effect>
+    </Border>
 </UserControl>

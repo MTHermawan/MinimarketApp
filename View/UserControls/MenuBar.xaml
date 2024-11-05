@@ -8,20 +8,21 @@
              d:DesignHeight="25" d:DesignWidth="800">
     <Grid Background="#DDDDDD">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="11.275"/>
+            <ColumnDefinition Width="132.852"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-            <ListView Background="Transparent" BorderBrush="Transparent">
-                <ListView.Resources>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="Width" Value="Auto"/>
-                        <Setter Property="Height" Value="Auto"/>
-                    </Style>
-                </ListView.Resources>
-            </ListView>
+        <ListView Background="Transparent" BorderBrush="Transparent" Grid.ColumnSpan="2">
+            <ListView.Resources>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="Height" Value="Auto"/>
+                </Style>
+            </ListView.Resources>
+        </ListView>
 
-        <Menu Height="auto" VerticalAlignment="Center" Background="Transparent">
+        <Menu Height="auto" VerticalAlignment="Center" Background="Transparent" Grid.ColumnSpan="2">
             <MenuItem Header="File">
                 <MenuItem Name="FileExit" Header="Exit" Click="FileExit_Click"/>
             </MenuItem>

@@ -3,6 +3,14 @@
                     xmlns:vm="clr-namespace:MinimarketApp.ViewModel"
                     xmlns:view="clr-namespace:MinimarketApp.View">
 
+    <DataTemplate DataType="{x:Type vm:DashboardVM}">
+        <view:Dashboard />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:LoginVM}">
+        <view:Login />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:ProdukVM}">
         <view:Produk />
     </DataTemplate>
@@ -19,6 +27,10 @@
         <view:Transaksi />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:TransaksiPembelianVM}">
+        <view:TransaksiPembelian />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:UserVM}">
         <view:User />
     </DataTemplate>
@@ -33,6 +45,30 @@
 
     <DataTemplate DataType="{x:Type vm:KaryawanVM}">
         <view:Karyawan />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:LevelVM}">
+        <view:Level />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:RiwayatPembelianVM}">
+        <view:RiwayatPembelian />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:RiwayatPenjualanVM}">
+        <view:RiwayatPenjualan />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:StokKeluarVM}">
+        <view:StokKeluar />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:DiskonVM}">
+        <view:Diskon />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:GrupProdukVM}">
+        <view:GrupProduk />
     </DataTemplate>
 
 </ResourceDictionary>
